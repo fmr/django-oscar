@@ -96,7 +96,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
@@ -186,10 +185,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.staticfiles',
     # External apps
-    'django_extensions',
     'haystack',
-    'debug_toolbar',
-    'pyzen',
     'south',
     # Apps from oscar
     'oscar',
@@ -214,7 +210,6 @@ INSTALLED_APPS = (
     'oscar.apps.dashboard.users',
     'oscar.apps.dashboard.orders',
     'oscar.apps.dashboard.promotions',
-    'oscar.apps.dashboard.catalogue',
     'sorl.thumbnail',
 )
 
@@ -229,10 +224,6 @@ APPEND_SLASH = True
 # Haystack settings
 HAYSTACK_SITECONF = 'oscar.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'dummy'
-
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False
-}
 
 # Oscar settings
 from oscar.defaults import *

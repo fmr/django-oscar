@@ -1,6 +1,3 @@
-"""
-Models of products
-"""
 import re
 from itertools import chain
 from datetime import datetime, date
@@ -16,7 +13,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from treebeard.mp_tree import MP_Node
 
 from oscar.apps.catalogue.managers import BrowsableProductManager
-
 
 
 class AbstractProductClass(models.Model):
@@ -164,7 +160,7 @@ class AbstractProduct(models.Model):
     # children would be "Green fleece - size L".
     
     # Universal product code
-    upc = models.CharField(_("UPC"), max_length=64, blank=True, null=True, db_index=True,
+    upc = models.CharField(_("UPC"), max_length=64, blank=True, null=True, unique=True,
         help_text="""Universal Product Code (UPC) is an identifier for a product which is 
                      not specific to a particular supplier.  Eg an ISBN for a book.""")
     
@@ -252,6 +248,14 @@ class AbstractProduct(models.Model):
         except ObjectDoesNotExist:
             return False
 
+    def is_purchase_permitted(self, user, quantity):
+        """
+        Test whether this product can be bought by the passed user.
+        """
+        if not self.has_stockrecord:
+            return False, _("No stock available")
+        return self.stockrecord.is_purchase_permitted(user, quantity)
+
     def add_category_from_breadcrumbs(self, breadcrumb):
         from oscar.apps.catalogue.utils import breadcrumbs_to_category
         category = breadcrumbs_to_category(breadcrumb)
@@ -274,7 +278,7 @@ class AbstractProduct(models.Model):
         u"""Return a product's item class"""
         if self.product_class:
             return self.product_class
-        if self.parent.product_class:
+        if self.parent and self.parent.product_class:
             return self.parent.product_class
         return None
 
