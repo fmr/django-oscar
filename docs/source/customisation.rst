@@ -3,7 +3,7 @@ Design decisions
 ================
 
 The central aim of oscar is to provide a solid core of an e-commerce project that can be
-extended and customised to suit the domain at hand.  This is acheived in several ways:
+extended and customised to suit the domain at hand.  This is achieved in several ways:
 
 Core models are abstract
 ------------------------

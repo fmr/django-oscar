@@ -23,3 +23,13 @@ Checkout
 * :doc:`recipes/enforcing_stock_rules`
 
 Lots more to come!
+
+.. toctree::
+   :maxdepth: 2
+
+   recipes/how_to_customise_an_app
+   recipes/how_to_customise_models
+   recipes/how_to_override_a_core_class
+   recipes/how_to_create_categories
+   recipes/how_to_configure_shipping
+   recipes/enforcing_stock_rules
